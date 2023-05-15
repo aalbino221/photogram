@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/button-has-type */
+import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 import Icon from './Icon';
 
@@ -46,9 +47,11 @@ function Login() {
         <Icon />
         Login with Google
       </button>
-      <button className="text-gray-800 text-xl border-b-2 border-gray-500 px-2 pb-1">
-        Just visiting
-      </button>
+      <Link to="/">
+        <button className="text-gray-800 text-xl border-b-2 border-gray-500 px-2 pb-1">
+          Just visiting
+        </button>
+      </Link>
     </Div>
   );
 }

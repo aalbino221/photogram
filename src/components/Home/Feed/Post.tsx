@@ -1,9 +1,9 @@
 /* eslint-disable react/button-has-type */
 import { Link } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
-import UserNamePicture from '../Reusable/UserNamePicture';
-import placeholder from '../../assets/lindy-fav.jpeg';
-import Img from '../Reusable/Img';
+import UserNamePicture from '../../Reusable/UserNamePicture';
+import placeholder from '../../../assets/lindy-fav.jpeg';
+import Img from '../../Reusable/Img';
 
 const PostContainer = tw.div`
   w-min
@@ -17,6 +17,10 @@ const PostContainer = tw.div`
 `;
 
 function Post() {
+  const showPostModal = () => {
+    document.querySelectorAll('dialog')[1]?.showModal();
+  };
+
   return (
     <PostContainer>
       <div className="px-4">
@@ -47,14 +51,16 @@ function Post() {
             <span className="pr-1 font-bold">Ding Chilling:</span>
             Comentário 2
           </p>
-          <p className="text-gray-400">View all comments</p>
+          <button onClick={showPostModal}>
+            <p className="text-gray-600">View all comments</p>
+          </button>
         </div>
       </div>
       <div className="border-t px-2 py-1">
         <input
           type="text"
           placeholder="Add a comment..."
-          className="w-11/12 outline-none text-gray-800"
+          className="w-11/12 outline-none text-gray-800 placeholder:text-gray-600"
         />
         <button className="text-gray-500 1/12">Post</button>
       </div>

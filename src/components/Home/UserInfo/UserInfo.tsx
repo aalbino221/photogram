@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import Stats from '../Reusable/Stats';
-import UserNamePicture from '../Reusable/UserNamePicture';
+import Stats from '../../Reusable/Stats';
+import UserNamePicture from '../../Reusable/UserNamePicture';
 
 function UserInfo() {
   return (

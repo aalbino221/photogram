@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import tw from 'tailwind-styled-components';
 import Img from '../Reusable/Img';
 import placeholder from '../../assets/placeholder-image.jpg';
@@ -14,23 +15,32 @@ const PostsDiv = tw.div`
 `;
 
 function ProfilePosts() {
+  const showPostModal = () => {
+    document.querySelectorAll('dialog')[1]?.showModal();
+  };
   return (
     <PostsDiv>
-      <Img
-        link={lindy}
-        height={17.5}
-        width={17.5}
-      />
-      <Img
-        link={lindy2}
-        height={17.5}
-        width={17.5}
-      />
-      <Img
-        link={lindy3}
-        height={17.5}
-        width={17.5}
-      />
+      <button onClick={showPostModal}>
+        <Img
+          link={lindy}
+          height={17.5}
+          width={17.5}
+        />
+      </button>
+      <button onClick={showPostModal}>
+        <Img
+          link={lindy2}
+          height={17.5}
+          width={17.5}
+        />
+      </button>
+      <button onClick={showPostModal}>
+        <Img
+          link={lindy3}
+          height={17.5}
+          width={17.5}
+        />
+      </button>
       <Img
         link={placeholder}
         height={17.5}

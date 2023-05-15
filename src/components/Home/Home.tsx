@@ -1,6 +1,6 @@
 import tw from 'tailwind-styled-components';
-import Feed from './Feed';
-import UserInfo from './UserInfo';
+import Feed from './Feed/Feed';
+import UserInfo from './UserInfo/UserInfo';
 
 const HomeContainer = tw.div`
   flex
