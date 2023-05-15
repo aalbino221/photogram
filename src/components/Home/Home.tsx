@@ -1,9 +1,21 @@
-const Home = () => {
+import tw from 'tailwind-styled-components';
+import Feed from './Feed';
+import UserInfo from './UserInfo';
+
+const HomeContainer = tw.div`
+  flex
+  mx-96
+  py-16
+  gap-16
+`;
+
+function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <HomeContainer>
+      <UserInfo />
+      <Feed />
+    </HomeContainer>
   );
-};
+}
 
 export default Home;
