@@ -4,12 +4,12 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface UserState {
   currentUser: string;
-  id: number;
+  id: string;
 }
 
 const initialState: UserState = {
   currentUser: 'Guest',
-  id: 0,
+  id: '',
 };
 
 export const currentUser = createSlice({

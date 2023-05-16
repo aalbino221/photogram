@@ -17,7 +17,6 @@ export const HeaderContainer = tw.div`
   justify-between
   px-96
   text-gray-800
-  z-10
   bg-white
 `;
 
