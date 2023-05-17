@@ -9,11 +9,11 @@ export default function IconsBar() {
   return (
     <div className="flex gap-6">
       <BtnIcon
-        classProp="fa-regular fa-square-plus text-2xl "
+        classProp="fa-regular fa-square-plus text-xl "
         onClick={showModal}
       />
       <Link to="/">
-        <BtnIcon classProp="fa-solid fa-house" />
+        <BtnIcon classProp="fa-solid fa-house text-lg" />
       </Link>
       <BtnIcon classProp="fa-solid fa-comment" />
       <UserDropdown />

@@ -1,6 +1,6 @@
 import tw from 'tailwind-styled-components';
-import ProfileInfo from './ProfileInfo';
-import ProfilePosts from './ProfilePosts';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
+import ProfilePosts from './ProfilePosts/ProfilePosts';
 
 const ProfileContainer = tw.div`
   mx-auto

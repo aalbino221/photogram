@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components';
 import styled from 'styled-components';
 import UserNamePicture from './UserNamePicture';
 import Img from './Img';
-import lindy4 from '../../assets/lindy4.jpg';
+import lindy4 from '../../../assets/lindy4.jpg';
 
 const Dialog = styled.dialog`
   ::backdrop {
@@ -41,6 +41,8 @@ function PostModal() {
           <div className="border-b p-4 pb-2">
             <div className="flex gap-3 pb-3">
               <UserNamePicture
+                imgLink={lindy4}
+                userName="lindy2"
                 imgSize={2.5}
                 fontSize="lg"
               />

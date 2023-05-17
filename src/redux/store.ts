@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import currentUserReducer from './currentUser';
+import showHeaderReducer from './showHeader';
 
 export const store = configureStore({
   reducer: {
     user: currentUserReducer,
+    header: showHeaderReducer,
   },
 });
 

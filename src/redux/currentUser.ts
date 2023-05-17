@@ -5,11 +5,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 export interface UserState {
   currentUser: string;
   id: string;
+  profilePicture: string;
 }
 
 const initialState: UserState = {
-  currentUser: 'Guest',
+  currentUser: '',
   id: '',
+  profilePicture: '',
 };
 
 export const currentUser = createSlice({
@@ -19,6 +21,7 @@ export const currentUser = createSlice({
     changeUser: (state, action: PayloadAction<UserState>) => {
       state.currentUser = action.payload.currentUser;
       state.id = action.payload.id;
+      state.profilePicture = action.payload.profilePicture;
     },
   },
 });

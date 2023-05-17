@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
-import lindy from '../../assets/lindy.jpeg';
-import Img from '../Reusable/Img';
+import lindy from '../../../assets/lindy.jpeg';
+import Img from '../../Reusable/components/Img';
 
 function ProfileInfo() {
   return (

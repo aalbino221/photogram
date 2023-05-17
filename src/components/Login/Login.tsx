@@ -2,15 +2,13 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/button-has-type */
 import { Link, useNavigate } from 'react-router-dom';
-import { useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useRef, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import tw from 'tailwind-styled-components';
-import type { RootState } from '../../redux/store';
 import Icon from './Icon';
-import registerGoogle, {
-  currentUser,
-} from '../../firebase/auth/registerGoogle';
+import registerGoogle from '../../firebase/auth/registerGoogle';
 import { changeUser } from '../../redux/currentUser';
+import { changeHeader } from '../../redux/showHeader';
 import loginGoogle from '../../firebase/auth/loginGoogle';
 
 const Div = tw.div`
@@ -25,7 +23,6 @@ const Div = tw.div`
 
 function Login() {
   const navigate = useNavigate();
-  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const usernameRef = useRef<HTMLInputElement>(null);
   const [usernameError, setUsernameError] = useState('');
@@ -38,30 +35,39 @@ function Login() {
   const register = async () => {
     if (usernameRef.current && usernameRef.current.value !== '') {
       const result = await registerGoogle(usernameRef.current.value);
-      if (result === 'success') {
+      if (result.success && result.data) {
         dispatch(
           changeUser({
             currentUser: usernameRef.current.value,
-            id: currentUser(),
+            id: result.data.id,
+            profilePicture: result.data.profilePhotoUrl,
           }),
         );
         redirectToHome('/');
-      } else setUsernameError(result);
+      } else setUsernameError(result.message?.toString() || 'Error');
     } else setUsernameError('Username cannot be empty');
   };
 
   const login = async () => {
     const result = await loginGoogle();
-    if (result === true) {
+    if (result.success && result.data) {
       dispatch(
         changeUser({
-          currentUser: usernameRef.current ? usernameRef.current.value : '',
-          id: currentUser(),
+          currentUser: result.data.name,
+          id: result.data.id,
+          profilePicture: result.data.profilePhotoUrl,
         }),
       );
       redirectToHome('/');
     } else setLoginError('No account found. Please register first.');
   };
+
+  useEffect(() => {
+    dispatch(changeHeader({ show: false }));
+    return () => {
+      dispatch(changeHeader({ show: true }));
+    };
+  }, [dispatch]);
 
   return (
     <Div>

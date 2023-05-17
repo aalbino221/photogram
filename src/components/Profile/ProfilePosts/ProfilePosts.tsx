@@ -1,10 +1,10 @@
 /* eslint-disable react/button-has-type */
 import tw from 'tailwind-styled-components';
-import Img from '../Reusable/Img';
-import placeholder from '../../assets/placeholder-image.jpg';
-import lindy from '../../assets/lindy.jpeg';
-import lindy2 from '../../assets/lindy2.jpeg';
-import lindy3 from '../../assets/lindy3.jpeg';
+import Img from '../../Reusable/components/Img';
+import placeholder from '../../../assets/placeholder-image.jpg';
+import lindy from '../../../assets/lindy.jpeg';
+import lindy2 from '../../../assets/lindy2.jpeg';
+import lindy3 from '../../../assets/lindy3.jpeg';
 
 const PostsDiv = tw.div`
   w-11/12

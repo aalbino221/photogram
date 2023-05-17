@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
-import Img from '../../Reusable/Img';
-import UserNamePicture from '../../Reusable/UserNamePicture';
+import Img from '../../Reusable/components/Img';
+import UserNamePicture from '../../Reusable/components/UserNamePicture';
 import lindy from '../../../assets/lindy.jpeg';
 /* eslint-disable react/button-has-type */
 
@@ -36,6 +36,8 @@ function CreatePostModal() {
             borderRadius={0}
           />
           <UserNamePicture
+            imgLink={lindy}
+            userName="lindy2"
             imgSize={2}
             fontSize="base"
           />

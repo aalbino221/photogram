@@ -1,9 +1,10 @@
 import styled from 'styled-components';
-import lindy from '../../assets/lindy.jpeg';
 
 interface UserNamePictureProps {
   imgSize: number;
   fontSize: string;
+  imgLink: string;
+  userName: string;
 }
 
 interface ImgContainerProps {
@@ -20,19 +21,19 @@ const ImgContainer = styled.div<ImgContainerProps>`
 export default function UserNamePicture({
   imgSize,
   fontSize,
+  imgLink,
+  userName,
 }: UserNamePictureProps) {
   return (
     <div className="flex items-center gap-3">
       <ImgContainer imgSize={imgSize}>
         <img
-          src={lindy}
+          src={imgLink}
           alt=""
           className="object-cover object-bottom w-full"
         />
       </ImgContainer>
-      <h2 className={`font-bold text-${fontSize} text-gray-800`}>
-        Lindyzinha231
-      </h2>
+      <h2 className={`font-bold text-${fontSize} text-gray-800`}>{userName}</h2>
     </div>
   );
 }
