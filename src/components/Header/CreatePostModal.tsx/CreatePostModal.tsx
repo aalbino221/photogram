@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import styled from 'styled-components';
+import { useState, useRef, useEffect } from 'react';
 import tw from 'tailwind-styled-components';
 import Img from '../../Reusable/components/Img';
 import UserNamePicture from '../../Reusable/components/UserNamePicture';
-import lindy from '../../../assets/lindy.jpeg';
+import placeholder from '../../../assets/placeholder-image.jpg';
+import savePhoto from '../../../firebase/storage/savePhoto';
+import savePost from '../../../firebase/firestore/newPost/savePost';
+import useCurrentUser from '../../../hooks/currentUser';
 /* eslint-disable react/button-has-type */
 
 const Dialog = styled.dialog`
@@ -18,9 +23,36 @@ const Div = tw.div`
 `;
 
 function CreatePostModal() {
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
+  const [change, setChange] = useState(false);
+  const [currentName, currentId, currentProfilePic] = useCurrentUser();
+
   const closeModal = () => {
     document.querySelector('dialog')?.close();
+    if (descriptionRef.current && imageRef.current) {
+      descriptionRef.current.value = '';
+      imageRef.current.value = '';
+      setChange(!change);
+    }
   };
+
+  const post = async () => {
+    if (imageRef.current?.files && imageRef.current.files.length > 0) {
+      const url = await savePhoto(imageRef.current?.files[0] as File);
+      const result = savePost(
+        url,
+        descriptionRef.current?.value as string,
+        currentId,
+      );
+      console.log(result);
+    }
+  };
+
+  useEffect(() => {
+    console.log('OI');
+  }, [change]);
+
   return (
     <Dialog className="p-0 shadow border rounded">
       <Div>
@@ -29,26 +61,56 @@ function CreatePostModal() {
             <h2>Create New Post</h2>
             <button onClick={closeModal}>X</button>
           </div>
-          <Img
-            link={lindy}
-            height={28}
-            width={38}
-            borderRadius={0}
-          />
+          <label
+            htmlFor="avatar"
+            className="custom-file-upload"
+          >
+            <div className="hover: cursor-pointer">
+              <Img
+                link={
+                  imageRef.current?.files && imageRef.current.files.length > 0
+                    ? URL.createObjectURL(imageRef.current?.files[0])
+                    : placeholder
+                }
+                height={28}
+                width={38}
+                borderRadius={0}
+              />
+            </div>
+            <p className="text-blue-800 font-bold hover: cursor-pointer text-center w-max mx-auto rounded mt-2">
+              Selecionar Imagem
+            </p>
+            <input
+              type="file"
+              id="avatar"
+              name="avatar"
+              accept="image/png, image/jpeg"
+              className="hidden"
+              ref={imageRef}
+              onChange={() => setChange(!change)}
+            />
+          </label>
           <UserNamePicture
-            imgLink={lindy}
-            userName="lindy2"
+            imgLink={currentProfilePic}
+            userName={currentName}
             imgSize={2}
             fontSize="base"
           />
           <textarea
             placeholder="Write a caption here"
-            className="outline-none h-32 w-full resize-none text-gray-600 text-base"
+            className="outline-none h-32 w-full resize-none text-gray-700 text-base"
+            ref={descriptionRef}
           />
         </div>
         <div className="flex justify-between text-blue-700 font-bold border-t border-gray-400 px-8 pt-2 text-lg">
           <button onClick={closeModal}>Back</button>
-          <button>Post</button>
+          <button
+            onClick={() => {
+              post();
+            }}
+          >
+            Post
+          </button>
         </div>
       </Div>
     </Dialog>

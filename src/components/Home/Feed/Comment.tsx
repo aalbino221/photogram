@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import { useState, useEffect } from 'react';
-import getUserInfo from '../../../firebase/firestore/getUserInfo';
+import getUserInfo from '../../../firebase/firestore/getInfo/getUserInfo';
 
 interface CommentProps {
   id: number;

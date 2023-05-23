@@ -8,9 +8,9 @@ import lindy from '../../../assets/lindy.jpeg';
 function UserInfo() {
   const user = useSelector((state: RootState) => state.user);
   return (
-    <div>
+    <div className="flex flex-col gap-3 w-56">
       {user.currentUser !== '' ? (
-        <div className="flex flex-col gap-3 w-56">
+        <div>
           <Link to="/profile/:id">
             <UserNamePicture
               imgLink={lindy}

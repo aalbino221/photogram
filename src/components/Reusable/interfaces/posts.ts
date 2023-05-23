@@ -10,16 +10,18 @@ interface Liked {
 }
 
 interface PostProps {
+  id: number;
   userId: string;
   photoUrl: string;
   likes: Liked[];
   comments: Comment[];
   profileUrl: string;
   description: string;
+  followed: boolean;
 }
 
 interface PostInfo {
-  postInfo: PostProps;
+  postId: number;
 }
 
 export type { PostProps, Comment, PostInfo, Liked };
