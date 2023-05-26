@@ -25,6 +25,11 @@ async function removeFollowersOrFollowing(
     const followedDocSnapshot = await fireStore.getDocs(followedDocQuery);
     const followedDoc = followedDocSnapshot.docs[0];
     await fireStore.deleteDoc(followedDoc.ref);
+    if (collectionName === 'followers') {
+      fireStore.updateDoc(doc.ref, { followerCount: fireStore.increment(-1) });
+    } else if (collectionName === 'following') {
+      fireStore.updateDoc(doc.ref, { followingCount: fireStore.increment(-1) });
+    }
     return true;
   } catch (err) {
     return false;

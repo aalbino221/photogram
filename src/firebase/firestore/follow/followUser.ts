@@ -21,6 +21,11 @@ async function addToFollowersOrFollowing(
     await fireStore.addDoc(followedCollection, {
       userId: userIdSecond,
     });
+    if (collectionName === 'followers') {
+      fireStore.updateDoc(doc.ref, { followerCount: fireStore.increment(1) });
+    } else if (collectionName === 'following') {
+      fireStore.updateDoc(doc.ref, { followingCount: fireStore.increment(1) });
+    }
     return true;
   } catch (err) {
     return false;

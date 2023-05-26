@@ -5,23 +5,20 @@ interface Comment {
   text: string;
 }
 
-interface Liked {
-  userId: string;
-}
-
 interface PostProps {
-  id: number;
+  id: string;
   userId: string;
   photoUrl: string;
-  likes: Liked[];
+  likes: number;
   comments: Comment[];
   profileUrl: string;
   description: string;
-  followed: boolean;
+  createdAt: string;
+  liked: boolean;
 }
 
 interface PostInfo {
-  postId: number;
+  postId: string;
 }
 
-export type { PostProps, Comment, PostInfo, Liked };
+export type { PostProps, Comment, PostInfo };

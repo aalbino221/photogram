@@ -65,7 +65,7 @@ export default function UserDropdown() {
                 borderBottom: '8px solid rgba(209, 213, 219)',
               }}
             />
-            <Link to="/profile/:id">
+            <Link to={`profile/${user.id}`}>
               <li>
                 <button onClick={closeDetails}>
                   <i className="fa-solid fa-user pr-1" />

@@ -2,7 +2,7 @@
 import * as fireStore from 'firebase/firestore';
 
 async function setCommentPost(
-  postId: number,
+  postId: string,
   userId: string,
   text: string,
 ): Promise<void> {

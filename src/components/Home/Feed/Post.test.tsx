@@ -20,9 +20,9 @@ describe.skip('Post componente', () => {
       comments: [{ userId: 'user231', text: 'Hello', id: 2 }],
       profileUrl: 'user231',
       description: 'This is a description',
-      id: 0,
+      id: 'adwasdwa',
     };
-    const { store } = renderWithStore(<Post postId={0} />);
+    const { store } = renderWithStore(<Post postId="adwadsaw" />);
     expect(screen.getByText('lindy2')).toBeInTheDocument();
     expect(screen.getByText(/user231/)).toBeInTheDocument();
     expect(screen.getByText(/5 Likes/)).toBeInTheDocument();

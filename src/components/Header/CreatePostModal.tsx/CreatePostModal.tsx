@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import styled from 'styled-components';
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 import Img from '../../Reusable/components/Img';
 import UserNamePicture from '../../Reusable/components/UserNamePicture';
@@ -23,6 +24,7 @@ const Div = tw.div`
 `;
 
 function CreatePostModal() {
+  const navigate = useNavigate();
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
   const [change, setChange] = useState(false);
@@ -45,12 +47,14 @@ function CreatePostModal() {
         descriptionRef.current?.value as string,
         currentId,
       );
-      console.log(result);
+      closeModal();
+      window.location.reload();
     }
   };
 
   useEffect(() => {
     console.log('OI');
+    console.log(imageRef.current?.files);
   }, [change]);
 
   return (
@@ -59,7 +63,9 @@ function CreatePostModal() {
         <div className="px-5 flex flex-col gap-4 ">
           <div className="flex justify-between font-bold text-2xl">
             <h2>Create New Post</h2>
-            <button onClick={closeModal}>X</button>
+            <button onClick={closeModal}>
+              <i className="fa-solid fa-xmark" />
+            </button>
           </div>
           <label
             htmlFor="avatar"

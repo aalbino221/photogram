@@ -10,7 +10,7 @@ function Feed() {
   const [posts, setPost] = useState<Array<PostInfo> | null>(null);
   useEffect(() => {
     async function getData() {
-      const data = await getPosts();
+      const data = await getPosts(1000);
       setPost(data);
       return data;
     }

@@ -1,6 +1,33 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import tw from 'tailwind-styled-components';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import ProfilePosts from './ProfilePosts/ProfilePosts';
+import getProfilePosts from '../../firebase/firestore/getInfo/getProfilePosts';
+import getUserInfo, {
+  UserInfoProps,
+} from '../../firebase/firestore/getInfo/getUserInfo';
+import ProfileSkeleton from './ProfileSkeleton';
+
+interface ProfilePost {
+  id: string;
+  photoUrl: string;
+}
+
+const defaultValue = {
+  id: '',
+  name: '',
+  profilePicture: '',
+  followingCount: 0,
+  followerCount: 0,
+  postCount: 0,
+};
+
+const defaultValuePosts = {
+  id: '',
+  photoUrl: '',
+};
 
 const ProfileContainer = tw.div`
   mx-auto
@@ -12,10 +39,34 @@ const ProfileContainer = tw.div`
 `;
 
 export default function Profile() {
+  const location = useLocation();
+  const userId = location.pathname.split('/')[2];
+  const [posts, setPosts] = useState<Array<ProfilePost> | null>(null);
+  const [profileInfo, setProfileInfo] = useState<UserInfoProps | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getProfilePosts(userId).then((data) => {
+      setPosts(data);
+    });
+    getUserInfo(userId).then((data) => {
+      setProfileInfo(data);
+      console.log(data);
+      setLoading(false);
+    });
+  }, [userId]);
+
+  if (loading) {
+    return (
+      <ProfileContainer>
+        <ProfileSkeleton />
+      </ProfileContainer>
+    );
+  }
   return (
     <ProfileContainer>
-      <ProfileInfo />
-      <ProfilePosts />
+      <ProfileInfo info={profileInfo || defaultValue} />
+      <ProfilePosts posts={posts || [defaultValuePosts]} />
     </ProfileContainer>
   );
 }

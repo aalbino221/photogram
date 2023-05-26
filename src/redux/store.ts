@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import currentUserReducer from './currentUser';
 import showHeaderReducer from './showHeader';
+import lastItemReducer from './lastItem';
+import selectedPostReducer from './selectedPost';
 
 export const store = configureStore({
   reducer: {
     user: currentUserReducer,
     header: showHeaderReducer,
+    lastItem: lastItemReducer,
+    selectedPost: selectedPostReducer,
   },
 });
 

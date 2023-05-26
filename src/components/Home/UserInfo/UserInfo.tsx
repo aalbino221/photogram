@@ -1,20 +1,32 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
+import { useEffect, useState } from 'react';
+import useCurrentUser from '../../../hooks/currentUser';
+import getUserInfo, {
+  UserInfoProps,
+} from '../../../firebase/firestore/getInfo/getUserInfo';
 import Stats from '../../Reusable/components/Stats';
 import UserNamePicture from '../../Reusable/components/UserNamePicture';
-import lindy from '../../../assets/lindy.jpeg';
 
 function UserInfo() {
-  const user = useSelector((state: RootState) => state.user);
+  const [userName, userId, userPhoto] = useCurrentUser();
+  const [info, setInfo] = useState<UserInfoProps | null>(null);
+
+  useEffect(() => {
+    if (userId !== '') {
+      getUserInfo(userId).then((data) => {
+        setInfo(data);
+      });
+    }
+  }, [userId]);
+
   return (
     <div className="flex flex-col gap-3 w-56">
-      {user.currentUser !== '' ? (
+      {userId !== '' ? (
         <div>
-          <Link to="/profile/:id">
+          <Link to={`/profile/${userId}`}>
             <UserNamePicture
-              imgLink={lindy}
-              userName="lindy2"
+              imgLink={userPhoto}
+              userName={userName}
               imgSize={4}
               fontSize="xl"
             />
@@ -22,15 +34,15 @@ function UserInfo() {
           <div className="flex justify-between">
             <Stats
               name="Following"
-              count={1}
+              count={info?.followingCount || 0}
             />
             <Stats
               name="Followers"
-              count={1}
+              count={info?.followerCount || 0}
             />
             <Stats
               name="Posts"
-              count={1}
+              count={info?.postCount || 0}
             />
           </div>
         </div>

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as fireStore from 'firebase/firestore';
 
-async function setLikePost(postId: number, userId: string): Promise<void> {
+async function setLikePost(postId: string, userId: string): Promise<void> {
   const db = fireStore.getFirestore();
   const postsCollection = fireStore.collection(db, 'posts');
   const query = fireStore.query(

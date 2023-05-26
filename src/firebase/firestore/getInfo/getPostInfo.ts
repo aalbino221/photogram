@@ -4,10 +4,9 @@ import app from '../../firebase-config';
 import {
   PostProps,
   Comment,
-  Liked,
 } from '../../../components/Reusable/interfaces/posts';
 
-async function getPostInfo(postId: number): Promise<PostProps> {
+async function getPostInfo(postId: string): Promise<PostProps> {
   try {
     const db = fireStore.getFirestore(app);
     const postsCollection = fireStore.collection(db, 'posts');
@@ -21,45 +20,52 @@ async function getPostInfo(postId: number): Promise<PostProps> {
     const post = doc.data() as PostProps;
 
     const commentsCollection = fireStore.collection(doc.ref, 'comments');
-    const commentsQuery = fireStore.query(commentsCollection);
+    const commentsQuery = fireStore.query(
+      commentsCollection,
+      fireStore.limit(3),
+    );
     const commentsSnapshot = await fireStore.getDocs(commentsQuery);
     const comments = commentsSnapshot.docs.map(
       (commentDoc) => commentDoc.data() as Comment,
     );
     post.comments = comments;
 
-    const likedCollection = fireStore.collection(doc.ref, 'likes');
-    const likedQuery = fireStore.query(likedCollection);
-    const likedSnapshot = await fireStore.getDocs(likedQuery);
-    const likes = likedSnapshot.docs.map((likeDoc) => likeDoc.data() as Liked);
-    post.likes = likes;
+    const currentUser = getAuth().currentUser?.uid || '';
 
-    const followersCollection = fireStore.collection(doc.ref, 'likes');
-    const currentuser = getAuth().currentUser?.uid || '';
-    const followersQuery = fireStore.query(
-      followersCollection,
-      fireStore.where('userId', '==', currentuser),
+    const likedCollection = fireStore.collection(doc.ref, 'likes');
+    const likesQuery = fireStore.query(likedCollection);
+    const likesSnapshot = await fireStore.getDocs(likesQuery);
+    post.likes = likesSnapshot.size;
+
+    const likedQuery = fireStore.query(
+      likedCollection,
+      fireStore.where('userId', '==', currentUser),
     );
-    const followersSnapshot = await fireStore.getDocs(followersQuery);
-    if (followersSnapshot.size > 0) {
-      post.followed = true;
+
+    const likedSnapshot = await fireStore.getDocs(likedQuery);
+
+    if (likedSnapshot.size > 0) {
+      post.liked = true;
     } else {
-      post.followed = false;
+      post.liked = false;
     }
+
+    post.createdAt = post.createdAt.toString();
 
     console.log('Estou num loop?');
 
     return post;
   } catch (error) {
     return {
-      id: 0,
+      id: '',
       userId: '',
       photoUrl: '',
-      likes: [],
+      likes: 0,
+      liked: false,
       comments: [],
       profileUrl: '',
       description: '',
-      followed: false,
+      createdAt: '',
     };
   }
 }

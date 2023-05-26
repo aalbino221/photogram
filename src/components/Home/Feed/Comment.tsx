@@ -3,12 +3,11 @@ import { useState, useEffect } from 'react';
 import getUserInfo from '../../../firebase/firestore/getInfo/getUserInfo';
 
 interface CommentProps {
-  id: number;
   text: string;
   userId: string;
 }
 
-export default function Comment({ id, text, userId }: CommentProps) {
+export default function Comment({ text, userId }: CommentProps) {
   const [name, setName] = useState('');
   useEffect(() => {
     async function getData() {
@@ -18,7 +17,7 @@ export default function Comment({ id, text, userId }: CommentProps) {
     getData();
   });
   return (
-    <p key={id}>
+    <p>
       <span className="pr-1 font-bold">{name}:</span>
       <span className={name === 'deleted' ? 'line-through' : ''}>
         {name !== 'deleted' ? text : 'deleted'}
