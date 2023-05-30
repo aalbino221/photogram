@@ -22,6 +22,7 @@ export const currentUser = createSlice({
       state.currentUser = action.payload.currentUser;
       state.id = action.payload.id;
       state.profilePicture = action.payload.profilePicture;
+      localStorage.setItem('user', action.payload.id);
     },
   },
 });

@@ -42,10 +42,15 @@ function Post({ postId }: PostInfo) {
   const [change, setChange] = useState(false);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const [likes, setLikes] = useState(0);
 
   const showPostModal = () => {
     dispatch(changeSelectedPost({ show: true, postInfo }));
     document.querySelectorAll('dialog')[1]?.showModal();
+  };
+
+  const handleChange = () => {
+    setChange(!change);
   };
 
   useEffect(() => {
@@ -58,7 +63,18 @@ function Post({ postId }: PostInfo) {
       setProfilePicture(userData.profilePicture);
     }
     fetchData();
-  }, [postId, change]);
+  }, [postId]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const postData = await getPostInfo(postId);
+      const userData = await getUserInfo(postData ? postData.userId : '');
+      setPostInfo(postData);
+      setName(userData.name);
+      setProfilePicture(userData.profilePicture);
+    }
+    fetchData();
+  }, [change, postId]);
 
   if (loading) {
     return (
@@ -104,6 +120,7 @@ function Post({ postId }: PostInfo) {
             postId={postInfo?.id || ''}
             currentUser={currentUserId}
             isLiked={postInfo?.liked || false}
+            change={handleChange}
           />
           <button onClick={() => {}}>
             <i className="fa-regular fa-comment-dots text-2xl" />
@@ -123,6 +140,7 @@ function Post({ postId }: PostInfo) {
       <AddComment
         postId={postInfo?.id || ''}
         currentUserId={currentUserId}
+        change={handleChange}
       />
     </PostContainer>
   );

@@ -8,12 +8,18 @@ import Stats from '../../Reusable/components/Stats';
 import UserNamePicture from '../../Reusable/components/UserNamePicture';
 
 function UserInfo() {
-  const [userName, userId, userPhoto] = useCurrentUser();
+  const [, userId] = useCurrentUser();
   const [info, setInfo] = useState<UserInfoProps | null>(null);
 
   useEffect(() => {
+    const userStorage = localStorage.getItem('user');
     if (userId !== '') {
       getUserInfo(userId).then((data) => {
+        setInfo(data);
+      });
+    } else if (userStorage !== null && userStorage !== '') {
+      getUserInfo(userStorage).then((data) => {
+        console.log(data);
         setInfo(data);
       });
     }
@@ -21,12 +27,12 @@ function UserInfo() {
 
   return (
     <div className="flex flex-col gap-3 w-56">
-      {userId !== '' ? (
+      {info !== null ? (
         <div>
           <Link to={`/profile/${userId}`}>
             <UserNamePicture
-              imgLink={userPhoto}
-              userName={userName}
+              imgLink={info?.profilePicture}
+              userName={info?.name}
               imgSize={4}
               fontSize="xl"
             />

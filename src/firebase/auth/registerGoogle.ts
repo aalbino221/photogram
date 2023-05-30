@@ -67,6 +67,8 @@ async function registerGoogle(name: string): Promise<RegisterResult> {
         auth.currentUser?.photoURL ||
         'https://firebasestorage.googleapis.com/v0/b/photogram-5eb44.appspot.com/o/profile%2Fplaceholder-person.jpg?alt=media&token=ae5af7b9-eb3d-4800-8608-a6b8a921c3c7',
       postCount: 0,
+      followerCount: 0,
+      followingCount: 0,
     };
     await fireStore.addDoc(usersCollection, newUser);
     return { success: true, data: newUser };

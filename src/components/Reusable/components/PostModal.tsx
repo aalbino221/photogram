@@ -1,8 +1,4 @@
-/* eslint-disable @typescript-eslint/indent */
-/* eslint-disable react/jsx-indent */
-/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable react/button-has-type */
 import tw from 'tailwind-styled-components';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -36,12 +32,17 @@ function PostModal() {
   const { showPost, postInfo } = useCurrenPost();
   const [userName, setUserName] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
+  const [change, setChange] = useState(false);
 
   console.log(postInfo);
 
   const closeModal = () => {
     document.querySelectorAll('dialog')[1]?.close();
     dispatch(changeSelectedPost({ show: false, postInfo: null }));
+  };
+
+  const handleChange = () => {
+    setChange(!change);
   };
 
   useEffect(() => {
@@ -51,7 +52,7 @@ function PostModal() {
       setUserPhoto(data.profilePicture);
     }
     getData();
-  }, [currentUserId, postInfo?.userId]);
+  }, [currentUserId, postInfo?.userId, change]);
 
   return (
     <Dialog className="border-0 p-0">
@@ -60,6 +61,7 @@ function PostModal() {
           <button
             className="ml-auto absolute right-5 top-1 text-2xl font-bold"
             onClick={closeModal}
+            type="button"
           >
             <i className="fa-solid fa-xmark" />
           </button>
@@ -92,6 +94,7 @@ function PostModal() {
           <button
             className="ml-auto absolute right-5 top-1 text-2xl font-bold"
             onClick={closeModal}
+            type="button"
           >
             <i className="fa-solid fa-xmark" />
           </button>
@@ -130,16 +133,21 @@ function PostModal() {
                   postId={postInfo?.id || ''}
                   currentUser={currentUserId}
                   isLiked={postInfo?.liked || false}
+                  change={handleChange}
                 />
                 <i className="fa-regular fa-comment-dots text-2xl" />
               </div>
               <p className="font-bold">{postInfo?.likes} Likes</p>
             </div>
             <div className="border-t px-2 py-1 flex">
-              <button className="text w-min px-1">
+              <button
+                className="text w-min px-1"
+                type="button"
+              >
                 <i className="fa-regular fa-face-smile text-xl" />
               </button>
               <AddComment
+                change={handleChange}
                 postId={postInfo?.id || ''}
                 currentUserId={currentUserId}
               />

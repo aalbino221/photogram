@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
 import BtnIcon from './BtnIcon/BtnIcon';
 import UserDropdown from './UserDropdown/UserDropdown';
+import useCurrentUser from '../../../hooks/currentUser';
 
 export default function IconsBar() {
+  const [userName] = useCurrentUser();
   const showModal = () => {
+    if (userName === '') {
+      return;
+    }
     document.querySelector('dialog')?.showModal();
   };
   return (

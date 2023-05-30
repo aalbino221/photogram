@@ -52,4 +52,5 @@ async function loginGoogle(): Promise<LoginResult> {
   }
 }
 
+export { getInfo };
 export default loginGoogle;

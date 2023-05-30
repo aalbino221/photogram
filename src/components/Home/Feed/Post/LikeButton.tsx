@@ -6,16 +6,20 @@ export default function LikeButton({
   postId,
   currentUser,
   isLiked,
+  change,
 }: {
   postId: string;
   currentUser: string;
   isLiked: boolean;
+  change: any;
 }) {
   const [liked, setLiked] = useState(false);
 
   const likePost = () => {
+    if (currentUser === '') return;
     setLikePost(postId, currentUser);
     setLiked(!liked);
+    change();
   };
 
   useEffect(() => {
