@@ -42,13 +42,9 @@ function CreatePostModal() {
   const post = async () => {
     if (imageRef.current?.files && imageRef.current.files.length > 0) {
       const url = await savePhoto(imageRef.current?.files[0] as File);
-      const result = savePost(
-        url,
-        descriptionRef.current?.value as string,
-        currentId,
-      );
-      closeModal();
+      await savePost(url, descriptionRef.current?.value as string, currentId);
       window.location.reload();
+      closeModal();
     }
   };
 
