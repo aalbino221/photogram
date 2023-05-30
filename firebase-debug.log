@@ -30,3 +30,52 @@ Java HotSpot(TM) 64-Bit Server VM (build 18+36-2087, mixed mode, sharing)
 [debug] [2023-05-30T11:53:48.870Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
 [debug] [2023-05-30T11:53:48.870Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\aalbi\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.17.4.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","photogram-5eb44","--rules","C:\\Users\\aalbi\\OneDrive\\Desktop\\Dev\\Projects\\photogram\\firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\aalbi\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.17.4.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"photogram-5eb44\",\"--rules\",\"C:\\\\Users\\\\aalbi\\\\OneDrive\\\\Desktop\\\\Dev\\\\Projects\\\\photogram\\\\firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
 [info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[info] +  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2023-05-30T11:54:02.679Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-05-30T11:54:04.674Z] Temp file directory for storage emulator: C:\Users\aalbi\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\aalbi\\AppData\\Local\\Temp/firebase/storage/blobs"}}
+[debug] [2023-05-30T11:54:04.686Z] > refreshing access token with scopes: []
+[debug] [2023-05-30T11:54:04.688Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-05-30T11:54:04.688Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-30T11:54:05.009Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-05-30T11:54:05.010Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-30T11:54:05.042Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/photogram-5eb44/sites 
+[debug] [2023-05-30T11:54:06.297Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/photogram-5eb44/sites 200
+[debug] [2023-05-30T11:54:06.298Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/photogram-5eb44/sites {"sites":[{"name":"projects/photogram-5eb44/sites/photogram-5eb44","defaultUrl":"https://photogram-5eb44.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2023-05-30T11:54:06.298Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/photogram-5eb44/webApps/-/config [none]
+[debug] [2023-05-30T11:54:07.126Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/photogram-5eb44/webApps/-/config 200
+[debug] [2023-05-30T11:54:07.126Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/photogram-5eb44/webApps/-/config {"projectId":"photogram-5eb44","appId":"1:376654910642:web:c62a08be513da1f1ace5ab","storageBucket":"photogram-5eb44.appspot.com","locationId":"us-central","apiKey":"AIzaSyA0lt2EapP4fsiNc7dmg2vEluRg1uEZeWo","authDomain":"photogram-5eb44.firebaseapp.com","messagingSenderId":"376654910642"}
+[debug] [2023-05-30T11:54:07.131Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/photogram-5eb44 [none]
+[debug] [2023-05-30T11:54:07.592Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/photogram-5eb44 200
+[debug] [2023-05-30T11:54:07.592Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/photogram-5eb44 {"projectId":"photogram-5eb44","projectNumber":"376654910642","displayName":"Photogram","name":"projects/photogram-5eb44","resources":{"hostingSite":"photogram-5eb44","storageBucket":"photogram-5eb44.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_35d714c5-27c2-4129-b7ed-90d2a85f8973"}
+[info] i  hosting[photogram-5eb44]: Serving hosting files from: build {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mbuild\u001b[22m"}}
+[info] +  hosting[photogram-5eb44]: Local server: http://127.0.0.1:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5000\u001b[22m\u001b[24m"}}
+[debug] [2023-05-30T11:54:07.682Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-05-30T11:54:07.683Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-05-30T11:54:07.683Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\aalbi\\.cache\\firebase\\emulators\\ui-v1.11.6\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\aalbi\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.6\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-05-30T11:54:07.869Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-05-30T11:54:07.870Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Hosting        │ 127.0.0.1:5000 │ n/a                             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
