@@ -46,14 +46,17 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getProfilePosts(userId).then((data) => {
+    const fetchPosts = async () => {
+      const data = await getProfilePosts(userId);
       setPosts(data);
-    });
-    getUserInfo(userId).then((data) => {
+    };
+    fetchPosts();
+    const fetchInfo = async () => {
+      const data = await getUserInfo(userId);
       setProfileInfo(data);
-      console.log(data);
       setLoading(false);
-    });
+    };
+    fetchInfo();
   }, [userId]);
 
   if (loading) {

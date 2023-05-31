@@ -22,9 +22,13 @@ async function addToFollowersOrFollowing(
       userId: userIdSecond,
     });
     if (collectionName === 'followers') {
-      fireStore.updateDoc(doc.ref, { followerCount: fireStore.increment(1) });
+      await fireStore.updateDoc(doc.ref, {
+        followerCount: fireStore.increment(1),
+      });
     } else if (collectionName === 'following') {
-      fireStore.updateDoc(doc.ref, { followingCount: fireStore.increment(1) });
+      await fireStore.updateDoc(doc.ref, {
+        followingCount: fireStore.increment(1),
+      });
     }
     return true;
   } catch (err) {
@@ -42,7 +46,7 @@ async function followUser(userIdFollowed: string, userIdFollower: string) {
     'followers',
   );
   if (!following) return;
-  addToFollowersOrFollowing(
+  await addToFollowersOrFollowing(
     userIdFollower,
     userIdFollowed,
     usersCollection,

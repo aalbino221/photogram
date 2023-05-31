@@ -2,6 +2,7 @@
 /* eslint-disable react/button-has-type */
 import tw from 'tailwind-styled-components';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { changeSelectedPost } from '../../../redux/selectedPost';
 import Img from '../../Reusable/components/Img';
 import getPostInfo from '../../../firebase/firestore/getInfo/getPostInfo';
@@ -27,8 +28,6 @@ function ProfilePosts({ posts }: ProfilePostsProps) {
   const dispatch = useDispatch();
 
   const showPostModal = async (id: string) => {
-    document.querySelectorAll('dialog')[1]?.showModal();
-    dispatch(changeSelectedPost({ show: true, postInfo: null }));
     const data = await getPostInfo(id);
     dispatch(changeSelectedPost({ show: true, postInfo: data }));
   };
@@ -55,17 +54,22 @@ function ProfilePosts({ posts }: ProfilePostsProps) {
   return (
     <PostsDiv>
       {posts?.map((post) => (
-        <button
-          onClick={() => {
-            showPostModal(post.id);
-          }}
+        <Link
+          to={`../posts/${post.id}`}
+          key={post.id}
         >
-          <Img
-            link={post.photoUrl}
-            height={17.5}
-            width={17.5}
-          />
-        </button>
+          <button
+            onClick={() => {
+              showPostModal(post.id);
+            }}
+          >
+            <Img
+              link={post.photoUrl}
+              height={17.5}
+              width={17.5}
+            />
+          </button>
+        </Link>
       ))}
     </PostsDiv>
   );

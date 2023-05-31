@@ -20,10 +20,7 @@ async function getPostInfo(postId: string): Promise<PostProps> {
     const post = doc.data() as PostProps;
 
     const commentsCollection = fireStore.collection(doc.ref, 'comments');
-    const commentsQuery = fireStore.query(
-      commentsCollection,
-      fireStore.limit(3),
-    );
+    const commentsQuery = fireStore.query(commentsCollection);
     const commentsSnapshot = await fireStore.getDocs(commentsQuery);
     const comments = commentsSnapshot.docs.map(
       (commentDoc) => commentDoc.data() as Comment,
@@ -51,8 +48,6 @@ async function getPostInfo(postId: string): Promise<PostProps> {
     }
 
     post.createdAt = post.createdAt.toString();
-
-    console.log('Estou num loop?');
 
     return post;
   } catch (error) {

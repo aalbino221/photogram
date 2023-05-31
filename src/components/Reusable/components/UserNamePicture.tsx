@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useEffect } from 'react';
 
 interface UserNamePictureProps {
   imgSize: number;
@@ -24,11 +25,12 @@ export default function UserNamePicture({
   imgLink,
   userName,
 }: UserNamePictureProps) {
+  useEffect(() => {});
   return (
     <div className="flex items-center gap-3">
       <ImgContainer imgSize={imgSize}>
         <img
-          src={imgLink}
+          src={imgLink || 'https://via.placeholder.com/150'}
           alt=""
           className="object-cover object-bottom w-full"
         />

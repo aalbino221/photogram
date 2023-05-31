@@ -19,7 +19,6 @@ function UserInfo() {
       });
     } else if (userStorage !== null && userStorage !== '') {
       getUserInfo(userStorage).then((data) => {
-        console.log(data);
         setInfo(data);
       });
     }

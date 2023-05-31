@@ -3,6 +3,7 @@ import currentUserReducer from './currentUser';
 import showHeaderReducer from './showHeader';
 import lastItemReducer from './lastItem';
 import selectedPostReducer from './selectedPost';
+import changeReducer from './change';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     header: showHeaderReducer,
     lastItem: lastItemReducer,
     selectedPost: selectedPostReducer,
+    change: changeReducer,
   },
 });
 

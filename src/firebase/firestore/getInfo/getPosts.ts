@@ -12,7 +12,6 @@ async function getPosts(limit: number): Promise<Array<PostInfo>> {
   );
   const querySnapshot = await fireStore.getDocs(query);
   const docsArray = querySnapshot.docs.map((doc) => doc.data().id as PostInfo);
-  console.log('Estou num loop?');
 
   return docsArray;
 }

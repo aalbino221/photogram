@@ -19,7 +19,6 @@ async function setCommentPost(
     userId,
     text,
   });
-  console.log('Estou num loop?');
 }
 
 export default setCommentPost;

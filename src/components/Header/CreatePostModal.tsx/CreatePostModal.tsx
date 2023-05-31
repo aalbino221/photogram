@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import styled from 'styled-components';
 import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import tw from 'tailwind-styled-components';
 import Img from '../../Reusable/components/Img';
 import UserNamePicture from '../../Reusable/components/UserNamePicture';
@@ -9,7 +8,7 @@ import placeholder from '../../../assets/placeholder-image.jpg';
 import savePhoto from '../../../firebase/storage/savePhoto';
 import savePost from '../../../firebase/firestore/newPost/savePost';
 import useCurrentUser from '../../../hooks/currentUser';
-/* eslint-disable react/button-has-type */
+import { changeState } from '../../../redux/change';
 
 const Dialog = styled.dialog`
   ::backdrop {
@@ -24,7 +23,7 @@ const Div = tw.div`
 `;
 
 function CreatePostModal() {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
   const [change, setChange] = useState(false);
@@ -41,17 +40,20 @@ function CreatePostModal() {
 
   const post = async () => {
     if (imageRef.current?.files && imageRef.current.files.length > 0) {
-      const url = await savePhoto(imageRef.current?.files[0] as File);
-      await savePost(url, descriptionRef.current?.value as string, currentId);
-      window.location.reload();
+      const file = imageRef.current.files[0];
+      const description = descriptionRef.current?.value;
       closeModal();
+      const url = await savePhoto(file as File);
+      await savePost(url, description as string, currentId);
+      dispatch(
+        changeState({
+          change: 1,
+        }),
+      );
     }
   };
 
-  useEffect(() => {
-    console.log('OI');
-    console.log(imageRef.current?.files);
-  }, [change]);
+  useEffect(() => {}, [change]);
 
   return (
     <Dialog className="p-0 shadow border rounded">
@@ -59,7 +61,10 @@ function CreatePostModal() {
         <div className="px-5 flex flex-col gap-4 ">
           <div className="flex justify-between font-bold text-2xl">
             <h2>Create New Post</h2>
-            <button onClick={closeModal}>
+            <button
+              onClick={closeModal}
+              type="button"
+            >
               <i className="fa-solid fa-xmark" />
             </button>
           </div>
@@ -105,8 +110,14 @@ function CreatePostModal() {
           />
         </div>
         <div className="flex justify-between text-blue-700 font-bold border-t border-gray-400 px-8 pt-2 text-lg">
-          <button onClick={closeModal}>Back</button>
           <button
+            onClick={closeModal}
+            type="button"
+          >
+            Back
+          </button>
+          <button
+            type="button"
             onClick={() => {
               post();
             }}

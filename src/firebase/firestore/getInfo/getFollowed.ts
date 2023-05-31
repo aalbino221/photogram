@@ -1,8 +1,10 @@
 import * as fireStore from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
 import app from '../../firebase-config';
 
-async function getFollowed(userId: string): Promise<boolean> {
+async function getFollowed(
+  userId: string,
+  currentUserId: string,
+): Promise<boolean> {
   try {
     const db = fireStore.getFirestore(app);
     const usersCollection = fireStore.collection(db, 'users');
@@ -10,13 +12,12 @@ async function getFollowed(userId: string): Promise<boolean> {
       usersCollection,
       fireStore.where('id', '==', userId),
     );
-    const currentUser = getAuth().currentUser?.uid || '';
     const querySnapshot = await fireStore.getDocs(query);
     const doc = querySnapshot.docs[0];
     const followedCollection = fireStore.collection(doc.ref, 'followers');
     const followsQuery = fireStore.query(
       followedCollection,
-      fireStore.where('userId', '==', currentUser),
+      fireStore.where('userId', '==', currentUserId),
     );
     const followsSnapshot = await fireStore.getDocs(followsQuery);
     if (followsSnapshot.size > 0) {

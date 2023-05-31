@@ -1,5 +1,7 @@
 /* eslint-disable react/button-has-type */
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { changeState } from '../../../../redux/change';
 import followUser from '../../../../firebase/firestore/follow/followUser';
 import unfollowUser from '../../../../firebase/firestore/follow/unfollowUser';
 import getFollowed from '../../../../firebase/firestore/getInfo/getFollowed';
@@ -11,24 +13,26 @@ export default function FollowButton({
   currentUserId: string;
   postUserId: string;
 }) {
+  const dispatch = useDispatch();
   const [followed, setFollowed] = useState(false);
 
-  const follow = () => {
-    if (!followed) {
-      followUser(postUserId, currentUserId);
-    } else {
-      unfollowUser(postUserId, currentUserId);
-    }
+  const follow = async () => {
     setFollowed(!followed);
+    if (!followed) {
+      await followUser(postUserId, currentUserId);
+    } else {
+      await unfollowUser(postUserId, currentUserId);
+    }
+    dispatch(changeState({ change: 1 }));
   };
 
   useEffect(() => {
     async function fetchData() {
-      const isFollowed = await getFollowed(postUserId);
+      const isFollowed = await getFollowed(postUserId, currentUserId);
       setFollowed(isFollowed);
     }
     fetchData();
-  }, [postUserId]);
+  }, [currentUserId, postUserId]);
 
   return (
     <div>

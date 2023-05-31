@@ -26,9 +26,13 @@ async function removeFollowersOrFollowing(
     const followedDoc = followedDocSnapshot.docs[0];
     await fireStore.deleteDoc(followedDoc.ref);
     if (collectionName === 'followers') {
-      fireStore.updateDoc(doc.ref, { followerCount: fireStore.increment(-1) });
+      await fireStore.updateDoc(doc.ref, {
+        followerCount: fireStore.increment(-1),
+      });
     } else if (collectionName === 'following') {
-      fireStore.updateDoc(doc.ref, { followingCount: fireStore.increment(-1) });
+      await fireStore.updateDoc(doc.ref, {
+        followingCount: fireStore.increment(-1),
+      });
     }
     return true;
   } catch (err) {
@@ -39,13 +43,13 @@ async function removeFollowersOrFollowing(
 async function unfollowUser(userIdFollowed: string, userIdFollower: string) {
   const db = fireStore.getFirestore(app);
   const usersCollection = fireStore.collection(db, 'users');
-  removeFollowersOrFollowing(
+  await removeFollowersOrFollowing(
     userIdFollowed,
     userIdFollower,
     usersCollection,
     'followers',
   );
-  removeFollowersOrFollowing(
+  await removeFollowersOrFollowing(
     userIdFollower,
     userIdFollowed,
     usersCollection,

@@ -19,7 +19,7 @@ export default function CommentsList({
 }) {
   return (
     <div>
-      {postComments?.length && postComments.length > 0
+      {postComments?.length && postComments.length > 0 && slice
         ? postComments.slice(0, 3).map((comment, index) => (
             <Comment
               key={index}
@@ -27,7 +27,13 @@ export default function CommentsList({
               userId={comment.userId}
             />
           ))
-        : ''}
+        : postComments?.map((comment, index) => (
+            <Comment
+              key={index}
+              text={comment.text}
+              userId={comment.userId}
+            />
+          ))}
     </div>
   );
 }

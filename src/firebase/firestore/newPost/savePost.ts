@@ -22,6 +22,15 @@ async function savePost(
       photoUrl: url,
       createdAt: fireStore.serverTimestamp(),
     };
+    const usersCollection = fireStore.collection(db, 'users');
+    const query = fireStore.query(
+      usersCollection,
+      fireStore.where('id', '==', userId),
+    );
+    const querySnapshot = await fireStore.getDocs(query);
+    const doc = querySnapshot.docs[0];
+    fireStore.updateDoc(doc.ref, { postCount: fireStore.increment(1) });
+
     await fireStore.addDoc(postsCollection, post);
     return { success: true };
   } catch (e) {

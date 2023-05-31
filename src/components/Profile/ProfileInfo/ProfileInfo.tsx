@@ -3,11 +3,12 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable operator-linebreak */
 /* eslint-disable react/button-has-type */
-import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
 import Img from '../../Reusable/components/Img';
 import { UserInfoProps } from '../../../firebase/firestore/getInfo/getUserInfo';
-import FollowButton from '../../Home/Feed/Post/FollowButton';
+import StatsInfo from './StatsInfo';
 import useCurrentUser from '../../../hooks/currentUser';
 import savePhoto from '../../../firebase/storage/savePhoto';
 import changeProfilePic from '../../../firebase/firestore/changeProfile/changeProfilePic';
@@ -19,11 +20,19 @@ interface ProfileInfoprops {
 
 function ProfileInfo({ info }: ProfileInfoprops) {
   const dispatch = useDispatch();
+  const change = useSelector((state: RootState) => state.change.change);
   const imageRef = useRef<HTMLInputElement>(null);
   const [currentUser, currentUserId] = useCurrentUser();
-  const { name, profilePicture, followingCount, followerCount, postCount } =
+  const { name, profilePicture, followingCount, followerCount, postCount, id } =
     info;
-
+  const statsInfo = {
+    name,
+    followerCount,
+    followingCount,
+    postCount,
+    currentUserId,
+    id,
+  };
   const changePicture = async () => {
     if (imageRef.current?.files && imageRef.current.files.length > 0) {
       const url = await savePhoto(imageRef.current?.files[0] as File);
@@ -33,6 +42,8 @@ function ProfileInfo({ info }: ProfileInfoprops) {
       );
     }
   };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="flex border-b pb-5 px-10">
@@ -81,33 +92,7 @@ function ProfileInfo({ info }: ProfileInfoprops) {
           />
         )}
       </div>
-      <div className="w-7/12 flex flex-col gap-3">
-        <div className="flex gap-5">
-          <h2 className="text-lg font-bold">{name}</h2>
-          <FollowButton
-            postUserId={info.id}
-            currentUserId={currentUserId}
-          />
-          <button className=" rounded px-3 bg-gray-400 text-white">
-            Message
-          </button>
-        </div>
-        <div className="flex gap-3">
-          <div>
-            <p className="text-gray-800 font-semibold">
-              {followingCount} Following
-            </p>
-          </div>
-          <div>
-            <p className="text-gray-800 font-semibold">
-              {followerCount} Followers
-            </p>
-          </div>
-          <div>
-            <p className="text-gray-800 font-semibold">{postCount} Posts</p>
-          </div>
-        </div>
-      </div>
+      <StatsInfo stats={statsInfo} />
     </div>
   );
 }

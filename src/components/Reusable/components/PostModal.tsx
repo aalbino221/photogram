@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import tw from 'tailwind-styled-components';
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import useCurrentUser from '../../../hooks/currentUser';
 import UserNamePicture from './UserNamePicture';
@@ -14,16 +13,13 @@ import AddComment from '../../Home/Feed/Post/AddComment';
 import CommentsList from '../../Home/Feed/Post/CommentsList';
 import getUserInfo from '../../../firebase/firestore/getInfo/getUserInfo';
 import placeholder from '../../../assets/placeholder-image.jpg';
-
-const Dialog = styled.dialog`
-  ::backdrop {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-`;
+import getPostInfo from '../../../firebase/firestore/getInfo/getPostInfo';
 
 const PostDiv = tw.div`
   flex
   w-min
+  border-2
+  bg-white
 `;
 
 function PostModal() {
@@ -33,13 +29,6 @@ function PostModal() {
   const [userName, setUserName] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
   const [change, setChange] = useState(false);
-
-  console.log(postInfo);
-
-  const closeModal = () => {
-    document.querySelectorAll('dialog')[1]?.close();
-    dispatch(changeSelectedPost({ show: false, postInfo: null }));
-  };
 
   const handleChange = () => {
     setChange(!change);
@@ -52,19 +41,20 @@ function PostModal() {
       setUserPhoto(data.profilePicture);
     }
     getData();
-  }, [currentUserId, postInfo?.userId, change]);
+  }, [currentUserId, postInfo?.userId, postInfo?.id]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const postData = await getPostInfo(postInfo?.id || '');
+      dispatch(changeSelectedPost({ show: true, postInfo: postData }));
+    }
+    fetchData();
+  }, [change, dispatch, postInfo?.id]);
 
   return (
-    <Dialog className="border-0 p-0">
+    <div className="mt-24 flex justify-center">
       {showPost && postInfo == null && (
         <PostDiv>
-          <button
-            className="ml-auto absolute right-5 top-1 text-2xl font-bold"
-            onClick={closeModal}
-            type="button"
-          >
-            <i className="fa-solid fa-xmark" />
-          </button>
           <div className="w-min">
             <Img
               link={placeholder}
@@ -91,13 +81,6 @@ function PostModal() {
       )}
       {showPost && postInfo !== null && (
         <PostDiv>
-          <button
-            className="ml-auto absolute right-5 top-1 text-2xl font-bold"
-            onClick={closeModal}
-            type="button"
-          >
-            <i className="fa-solid fa-xmark" />
-          </button>
           <div className="w-min">
             <Img
               link={postInfo?.photoUrl || ''}
@@ -155,7 +138,7 @@ function PostModal() {
           </div>
         </PostDiv>
       )}
-    </Dialog>
+    </div>
   );
 }
 

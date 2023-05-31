@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import tw from 'tailwind-styled-components';
 import Feed from './Feed/Feed';
 import UserInfo from './UserInfo/UserInfo';
@@ -12,9 +11,6 @@ const HomeContainer = tw.div`
 `;
 
 function Home() {
-  useEffect(() => {
-    console.log('Oi do home');
-  });
   return (
     <HomeContainer>
       <UserInfo />

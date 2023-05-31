@@ -21,20 +21,29 @@ const auth = fireAuth.getAuth(app);
 const db = fireStore.getFirestore(app);
 
 async function getInfo(id: string): Promise<Data> {
-  const usersCollection = fireStore.collection(db, 'users');
-  const query = fireStore.query(
-    usersCollection,
-    fireStore.where('id', '==', id),
-  );
-  const querySnapshot = await fireStore.getDocs(query);
-  const docsArray = querySnapshot.docs.map((doc) => doc.data());
-  const returnValue = {
-    id: docsArray[0].id,
-    name: docsArray[0].name,
-    profilePhotoUrl: docsArray[0].profilePhotoUrl,
-    postCount: docsArray[0].postCount,
-  };
-  return returnValue;
+  try {
+    const usersCollection = fireStore.collection(db, 'users');
+    const query = fireStore.query(
+      usersCollection,
+      fireStore.where('id', '==', id),
+    );
+    const querySnapshot = await fireStore.getDocs(query);
+    const docsArray = querySnapshot.docs.map((doc) => doc.data());
+    const returnValue = {
+      id: docsArray[0].id,
+      name: docsArray[0].name,
+      profilePhotoUrl: docsArray[0].profilePhotoUrl,
+      postCount: docsArray[0].postCount,
+    };
+    return returnValue;
+  } catch (error) {
+    return {
+      id: '',
+      name: '',
+      profilePhotoUrl: '',
+      postCount: 0,
+    };
+  }
 }
 
 async function loginGoogle(): Promise<LoginResult> {

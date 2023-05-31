@@ -42,11 +42,9 @@ function Post({ postId }: PostInfo) {
   const [change, setChange] = useState(false);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const [likes, setLikes] = useState(0);
 
   const showPostModal = () => {
     dispatch(changeSelectedPost({ show: true, postInfo }));
-    document.querySelectorAll('dialog')[1]?.showModal();
   };
 
   const handleChange = () => {
@@ -104,10 +102,6 @@ function Post({ postId }: PostInfo) {
             userName={name}
           />
         </Link>
-        <FollowButton
-          currentUserId={currentUserId}
-          postUserId={postInfo?.userId || ''}
-        />
       </div>
       <Img
         link={postInfo?.photoUrl || ''}
@@ -132,9 +126,11 @@ function Post({ postId }: PostInfo) {
             postComments={postInfo?.comments}
             slice
           />
-          <button onClick={() => showPostModal()}>
-            <p className="text-gray-600">View all comments</p>
-          </button>
+          <Link to={`/posts/${postId}`}>
+            <button onClick={() => showPostModal()}>
+              <p className="text-gray-600">View all comments</p>
+            </button>
+          </Link>
         </div>
       </div>
       <AddComment

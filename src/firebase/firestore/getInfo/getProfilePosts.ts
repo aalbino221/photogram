@@ -19,8 +19,10 @@ async function getProfilePosts(userId: string): Promise<Array<ProfilePost>> {
     return {
       id: data.id,
       photoUrl: data.photoUrl,
+      createdAt: data.createdAt,
     };
   });
+  docsArray.sort((a, b) => b.createdAt - a.createdAt);
   return docsArray;
 }
 

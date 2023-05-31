@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Login from './components/Login/Login';
@@ -21,11 +18,15 @@ const Div = styled.div`
 function App() {
   const showHeader = useSelector((state: RootState) => state.header.show);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getLogin() {
       const objString = localStorage.getItem('user');
-      if (objString === '' || objString == null) return;
+      if (objString === '' || objString == null) {
+        setLoading(false);
+        return;
+      }
       const result = await getInfo(objString);
       dispatch(
         changeUser({
@@ -34,10 +35,12 @@ function App() {
           profilePicture: result.profilePhotoUrl,
         }),
       );
+      setLoading(false);
     }
     getLogin();
   }, [dispatch]);
 
+  if (loading) return null;
   return (
     <HashRouter>
       <Div>
@@ -55,8 +58,11 @@ function App() {
             path="/login"
             element={<Login />}
           />
+          <Route
+            path="/posts/:id"
+            element={<PostModal />}
+          />
         </Routes>
-        <PostModal />
       </Div>
     </HashRouter>
   );

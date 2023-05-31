@@ -20,7 +20,6 @@ async function getUserInfo(userId: string): Promise<UserInfoProps> {
     );
     const querySnapshot = await fireStore.getDocs(query);
     const docsArray = querySnapshot.docs.map((doc) => doc.data());
-    console.log('Estou num loop?');
     return {
       id: docsArray[0].id,
       name: docsArray[0].name,
@@ -30,7 +29,6 @@ async function getUserInfo(userId: string): Promise<UserInfoProps> {
       postCount: docsArray[0].postCount,
     };
   } catch (error) {
-    console.log('Estou num loop?');
     return {
       id: '',
       name: 'deleted',

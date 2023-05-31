@@ -24,7 +24,6 @@ async function setLikePost(postId: string, userId: string): Promise<void> {
       userId,
     });
   }
-  console.log('Estou num loop?');
 }
 
 export default setLikePost;
