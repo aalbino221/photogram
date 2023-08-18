@@ -1,4 +1,4 @@
-# PhotoGram
+# Photogram
 
 A web application is developed using HTML, CSS, React, Styled Components, Tailwind, and TypeScript on the frontend, with Firebase on the backend. The platform is built around Instagram-like functionalities, enabling user authentication through Google, allowing users to make posts, give likes, leave comments, and manage followers. The application features seamless routing using React Router Dom and utilizes React Redux for global state management. Firebase is employed to store posts and user data in Firestore Database, while Firebase Storage is used to store images.
 
