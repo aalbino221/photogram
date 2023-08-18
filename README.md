@@ -16,9 +16,17 @@ https://photogram-5eb44.web.app/
 
 ## ⚙️ Features
 
-- Use of firebase for backend storage
-- Leaderboard for user's best times
-- Multiple images
+- User Authentication: Users can securely log in via Google for access.
+- Instagram-like Functionalities: Platform enables posting, likes, comments, and followers.
+- User Profiles: Profiles showcase posts, followers, and connections.
+- Smooth Routing: React Router Dom ensures seamless navigation.
+- Global State Management: React Redux manages data efficiently.
+- Post Interactivity: Users can like, comment, and engage with posts.
+- Follower System: Follow and be followed for networking.
+- Styled Components and Tailwind: Efficient styling for a cohesive UI.
+- Firebase Integration: Backend stores user data, posts, and images.
+- Data Persistence: Access content across sessions.
+- Secure Data Handling: Implementation of Firebase security.
   
 ## 💻 Built with
 
