@@ -8,10 +8,10 @@ https://photogram-5eb44.web.app/
 
 <p>
   <img src="https://github.com/aalbino221/wheres-waldo/assets/93986213/eee89351-1899-4a66-8d55-b4ee01b6010e" alt="Screenshot 1" width="200">
-  <img src="https://github.com/aalbino221/photogram/assets/93986213/b377251c-307d-407b-ba40-d90678cb97e4" alt="Screenshot 2" width="200">
-  <img src="https://github.com/aalbino221/photogram/assets/93986213/8f4d1c64-89e2-4110-b3a6-658b5a35eb43" alt="Screenshot 3" width="200">
-  <img src="https://github.com/aalbino221/photogram/assets/93986213/6ace4cc7-3fc6-4d13-885d-131875ca3d66" alt="Screenshot 4" width="200">
-  <img src="https://github.com/aalbino221/photogram/assets/93986213/29182a89-4428-4f1f-9c30-1206a10470cc" alt="Screenshot 5" width="200">
+  <img src="https://github.com/aalbino221/photogram/assets/93986213/b2e563e4-23fa-4383-987b-d9a9054a98e2" alt="Screenshot 2" width="200">
+  <img src="https://github.com/aalbino221/photogram/assets/93986213/26ee2a96-8fd9-432a-bf8d-58fc9203cc10" alt="Screenshot 3" width="200">
+  <img src="https://github.com/aalbino221/photogram/assets/93986213/0c32caaa-6c5c-4de9-a87d-2503150cfd3a" alt="Screenshot 4" width="200">
+  <img src="https://github.com/aalbino221/photogram/assets/93986213/9f5f08c8-31c2-47a4-a7dc-103ce0afc83d" alt="Screenshot 5" width="200">
 </p>
 
 ## ⚙️ Features
