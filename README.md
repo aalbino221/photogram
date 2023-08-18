@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# PhotoGram
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web application is developed using HTML, CSS, React, Styled Components, Tailwind, and TypeScript on the frontend, with Firebase on the backend. The platform is built around Instagram-like functionalities, enabling user authentication through Google, allowing users to make posts, give likes, leave comments, and manage followers. The application features seamless routing using React Router Dom and utilizes React Redux for global state management. Firebase is employed to store posts and user data in Firestore Database, while Firebase Storage is used to store images.
 
-## Available Scripts
+## 🚀 Demo
+https://photogram-5eb44.web.app/
+## 📷 Screenshot
 
-In the project directory, you can run:
+<p>
+  ![image](https://github.com/aalbino221/photogram/assets/93986213/698f8faf-a7bf-45d4-b54f-a86b87e6c31f)
+  ![image](https://github.com/aalbino221/wheres-waldo/assets/93986213/eee89351-1899-4a66-8d55-b4ee01b6010e)
+  ![image](https://github.com/aalbino221/photogram/assets/93986213/b377251c-307d-407b-ba40-d90678cb97e4)
+  ![image](https://github.com/aalbino221/photogram/assets/93986213/6ace4cc7-3fc6-4d13-885d-131875ca3d66)
+  ![image](https://github.com/aalbino221/photogram/assets/93986213/29182a89-4428-4f1f-9c30-1206a10470cc)
+  
+  <img src="https://github.com/aalbino221/wheres-waldo/assets/93986213/b937f5d7-65bb-4324-95ba-b3c2a4a6af87" alt="Screenshot 2" width="200">
+  <img src="https://github.com/aalbino221/wheres-waldo/assets/93986213/2d3d3d95-2274-4a69-87d2-364bf51ac303" alt="Screenshot 1" width="200">
+  <img src="https://github.com/aalbino221/wheres-waldo/assets/93986213/c929d159-082d-4b8c-9c09-f5c3004103f6" alt="Screenshot 3" width="200">
+</p>
 
-### `npm start`
+## ⚙️ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Use of firebase for backend storage
+- Leaderboard for user's best times
+- Multiple images
+  
+## 💻 Built with
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- React
+- Styled Componentes
+- Tailwind
+- TypeScript
+- Firebase
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
